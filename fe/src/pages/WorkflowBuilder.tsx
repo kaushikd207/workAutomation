@@ -191,7 +191,7 @@ export default function WorkflowBuilder() {
     );
   };
 
-  const handleSelectAction = (type: "email" | "telegram") => {
+  const handleSelectAction = (type: "email" | "telegram" | "AI_Agent") => {
     if (!selectedNodeId) return;
 
     const newNodeId = `${Date.now()}`;
@@ -199,8 +199,14 @@ export default function WorkflowBuilder() {
       id: newNodeId,
       type: "customNode",
       position: { x: Math.random() * 400 + 200, y: Math.random() * 200 + 100 },
+
       data: {
-        label: type === "email" ? "Send Email" : "Send Telegram",
+        label:
+          type === "email"
+            ? "Send Email"
+            : type === "telegram"
+            ? "Send Telegram Message"
+            : "AI Agent",
         icon: type === "email" ? "📧" : "💬",
         type: "action",
         onAddNode: handleAddNode,
